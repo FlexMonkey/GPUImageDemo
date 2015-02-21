@@ -12,6 +12,9 @@ import GPUImage
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
 {
     let pickerView = UIPickerView(frame: CGRectZero)
+    let sliderOne = ParameterWidget(frame: CGRectZero)
+    let sliderTwo = ParameterWidget(frame: CGRectZero)
+    let sliderThree = ParameterWidget(frame: CGRectZero)
     
     let sourceImageView = UIImageView(frame: CGRectZero)
     let targetImageView = UIImageView(frame: CGRectZero)
@@ -25,7 +28,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             if let sourceImage = sourceImage
             {
                 sourceImageView.image = sourceImage
-                applyFilter(gpuImageDelegate.filters[pickerView.selectedRowInComponent(0)])
+                sliderChangeHandler()
             }
         }
     }
@@ -51,20 +54,58 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         view.addSubview(pickerView)
         pickerView.delegate = self
         pickerView.dataSource = self
+    
+        pickerView.backgroundColor = UIColor.darkGrayColor()
+        pickerView.layer.cornerRadius = 5
+        pickerView.layer.shadowColor = UIColor.blackColor().CGColor
+        pickerView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        pickerView.layer.shadowOpacity = 0.5
    
+        for slider in [sliderOne, sliderTwo, sliderThree]
+        {
+            view.addSubview(slider)
+            slider.addTarget(self, action: "sliderChangeHandler", forControlEvents: UIControlEvents.ValueChanged)
+        }
+        
         sourceImage = UIImage(named: "DSC00776.jpg")
+        populateLabels(gpuImageDelegate.filters[pickerView.selectedRowInComponent(0)])
     }
     
-    func applyFilter(filter: ImageFilter)
+    func populateLabels(filter: ImageFilter)
     {
-        targetImageView.image = gpuImageDelegate.applyFilter(filter, values: [0], sourceImage: sourceImage!)
+        let fieldNames = gpuImageDelegate.getFieldNamesForFilter(filter)
+  
+        for (idx: Int, slider: ParameterWidget) in enumerate([sliderOne, sliderTwo, sliderThree])
+        {
+            if fieldNames.count > idx
+            {
+                slider.fieldName = fieldNames[idx]
+                slider.value = 0.5
+                UIView.animateWithDuration(0.25, animations: {slider.alpha = 1})
+            }
+            else
+            {
+                slider.fieldName = nil
+                UIView.animateWithDuration(0.25, animations: {slider.alpha = 0})
+            }
+        }
+        
+        sliderChangeHandler()
+    }
+
+    func sliderChangeHandler()
+    {
+        let values = [CGFloat(sliderOne.value), CGFloat(sliderTwo.value), CGFloat(sliderThree.value)]
+        let filter = gpuImageDelegate.filters[pickerView.selectedRowInComponent(0)]
+        
+        targetImageView.image = gpuImageDelegate.applyFilter(filter, values: values, sourceImage: sourceImage!)
     }
     
     // MARK: Picker View Support
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        applyFilter(gpuImageDelegate.filters[row])
+        populateLabels(gpuImageDelegate.filters[row])
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String!
@@ -88,12 +129,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     {
         let top = topLayoutGuide.length
         let imageViewWidth = CGFloat(view.frame.width / 2)
+        let pickerViewHeight : CGFloat = 216
         
         sourceImageView.frame = CGRect(x: 0, y: top, width: imageViewWidth, height: imageViewWidth).rectByInsetting(dx: 10, dy: 10)
         targetImageView.frame = CGRect(x: imageViewWidth, y: top, width: imageViewWidth, height: imageViewWidth).rectByInsetting(dx: 10, dy: 10)
         
-        pickerView.frame = CGRect(x: 0, y: view.frame.height - 162 - top, width: view.frame.width * 0.333, height: 162).rectByInsetting(dx: 10, dy: 0)
+        pickerView.frame = CGRect(x: 0, y: view.frame.height - pickerViewHeight - top, width: view.frame.width * 0.333, height: pickerViewHeight).rectByInsetting(dx: 10, dy: 0)
         
+        sliderOne.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - pickerViewHeight - top - 5, width: view.frame.width * 0.666, height: pickerViewHeight / 3).rectByInsetting(dx: 10, dy: 5)
+        
+        sliderTwo.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - (pickerViewHeight / 1.5) - top, width: view.frame.width * 0.666, height: pickerViewHeight / 3).rectByInsetting(dx: 10, dy: 5)
+        
+        sliderThree.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - (pickerViewHeight / 3) - top + 5, width: view.frame.width * 0.666, height: pickerViewHeight / 3).rectByInsetting(dx: 10, dy: 5)
     }
     
     override func supportedInterfaceOrientations() -> Int

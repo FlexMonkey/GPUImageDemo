@@ -17,6 +17,7 @@
 		BEFF946B1A985ACA00DFEDFF /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BEFF94661A985A5A00DFEDFF /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEFF946E1A985B2800DFEDFF /* GPUImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFF946D1A985B2800DFEDFF /* GPUImageDelegate.swift */; };
 		BEFF94701A985CD900DFEDFF /* DSC00776.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEFF946F1A985CD900DFEDFF /* DSC00776.jpg */; };
+		BEFF94741A98974B00DFEDFF /* ParameterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFF94731A98974B00DFEDFF /* ParameterWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		BEFF945D1A985A5A00DFEDFF /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "GPUImage-master/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
 		BEFF946D1A985B2800DFEDFF /* GPUImageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPUImageDelegate.swift; sourceTree = "<group>"; };
 		BEFF946F1A985CD900DFEDFF /* DSC00776.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = DSC00776.jpg; path = assets/DSC00776.jpg; sourceTree = "<group>"; };
+		BEFF94731A98974B00DFEDFF /* ParameterWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		BEFF943A1A9859F700DFEDFF /* GPUImageDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BEFF94721A98973800DFEDFF /* controls */,
 				BEFF94711A985CDD00DFEDFF /* assets */,
 				BEFF946C1A985B0D00DFEDFF /* gpuImage */,
 				BEFF943D1A9859F700DFEDFF /* AppDelegate.swift */,
@@ -180,6 +183,14 @@
 				BEFF946F1A985CD900DFEDFF /* DSC00776.jpg */,
 			);
 			name = assets;
+			sourceTree = "<group>";
+		};
+		BEFF94721A98973800DFEDFF /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				BEFF94731A98974B00DFEDFF /* ParameterWidget.swift */,
+			);
+			name = controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFF94401A9859F700DFEDFF /* ViewController.swift in Sources */,
+				BEFF94741A98974B00DFEDFF /* ParameterWidget.swift in Sources */,
 				BEFF946E1A985B2800DFEDFF /* GPUImageDelegate.swift in Sources */,
 				BEFF943E1A9859F700DFEDFF /* AppDelegate.swift in Sources */,
 			);
