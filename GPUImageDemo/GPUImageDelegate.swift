@@ -84,20 +84,56 @@ class GPUImageDelegate: NSObject
             }
             
         case ImageFilter.SmoothToon:
-            // blurRadiusInPixels, threshold, quantizationLevels
+       
             gpuImageFilter =  GPUImageSmoothToonFilter()
             
+            if let gpuImageFilter = gpuImageFilter as? GPUImageSmoothToonFilter
+            {
+                if values.count > 2
+                {
+                    gpuImageFilter.blurRadiusInPixels = values[0] * 10
+                    gpuImageFilter.threshold = values[1]
+                    gpuImageFilter.quantizationLevels = values[2] * 10
+                }
+            }
+            
         case ImageFilter.Emboss:
-            // intensity
+     
             gpuImageFilter =  GPUImageEmbossFilter()
             
+            if let gpuImageFilter = gpuImageFilter as? GPUImageEmbossFilter
+            {
+                if values.count > 0
+                {
+                    gpuImageFilter.intensity = values[0] * 4
+                }
+            }
+            
         case ImageFilter.SphereRefraction:
-            //  radius, refractiveIndex
+     
             gpuImageFilter =  GPUImageSphereRefractionFilter()
             
+            if let gpuImageFilter = gpuImageFilter as? GPUImageSphereRefractionFilter
+            {
+                if values.count > 1
+                {
+                    gpuImageFilter.radius = values[0]
+                    gpuImageFilter.refractiveIndex = values[1]
+                }
+            }
+            
         case ImageFilter.GlassSphere:
-            //radius, refractiveIndex
+    
             gpuImageFilter =  GPUImageGlassSphereFilter()
+            
+            if let gpuImageFilter = gpuImageFilter as? GPUImageGlassSphereFilter
+            {
+                if values.count > 1
+                {
+                    gpuImageFilter.radius = values[0]
+                    gpuImageFilter.refractiveIndex = values[1]
+                }
+            }
         }
         
         return gpuImageFilter.imageByFilteringImage(sourceImage)

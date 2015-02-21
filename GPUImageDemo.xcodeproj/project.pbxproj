@@ -521,6 +521,7 @@
 				BEFF94591A9859F800DFEDFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BEFF945A1A9859F800DFEDFF /* Build configuration list for PBXNativeTarget "GPUImageDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -529,6 +530,7 @@
 				BEFF945C1A9859F800DFEDFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
