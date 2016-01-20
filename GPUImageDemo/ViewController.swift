@@ -75,7 +75,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     {
         let fieldNames = gpuImageDelegate.getFieldNamesForFilter(filter)
   
-        for (idx: Int, slider: ParameterWidget) in enumerate([sliderOne, sliderTwo, sliderThree])
+        for (idx, slider): (Int, ParameterWidget) in [sliderOne, sliderTwo, sliderThree].enumerate()
         {
             if fieldNames.count > idx
             {
@@ -131,21 +131,21 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let imageViewWidth = CGFloat(view.frame.width / 2)
         let pickerViewHeight : CGFloat = 216
         
-        sourceImageView.frame = CGRect(x: 0, y: top, width: imageViewWidth, height: imageViewWidth).rectByInsetting(dx: 10, dy: 10)
-        targetImageView.frame = CGRect(x: imageViewWidth, y: top, width: imageViewWidth, height: imageViewWidth).rectByInsetting(dx: 10, dy: 10)
+        sourceImageView.frame = CGRect(x: 0, y: top, width: imageViewWidth, height: imageViewWidth).insetBy(dx: 10, dy: 10)
+        targetImageView.frame = CGRect(x: imageViewWidth, y: top, width: imageViewWidth, height: imageViewWidth).insetBy(dx: 10, dy: 10)
         
-        pickerView.frame = CGRect(x: 0, y: view.frame.height - pickerViewHeight - top, width: view.frame.width * 0.333, height: pickerViewHeight).rectByInsetting(dx: 10, dy: 0)
+        pickerView.frame = CGRect(x: 0, y: view.frame.height - pickerViewHeight - top, width: view.frame.width * 0.333, height: pickerViewHeight).insetBy(dx: 10, dy: 0)
         
-        sliderOne.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - pickerViewHeight - top - 5, width: view.frame.width * 0.666, height: pickerViewHeight / 3).rectByInsetting(dx: 10, dy: 5)
+        sliderOne.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - pickerViewHeight - top - 5, width: view.frame.width * 0.666, height: pickerViewHeight / 3).insetBy(dx: 10, dy: 5)
         
-        sliderTwo.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - (pickerViewHeight / 1.5) - top, width: view.frame.width * 0.666, height: pickerViewHeight / 3).rectByInsetting(dx: 10, dy: 5)
+        sliderTwo.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - (pickerViewHeight / 1.5) - top, width: view.frame.width * 0.666, height: pickerViewHeight / 3).insetBy(dx: 10, dy: 5)
         
-        sliderThree.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - (pickerViewHeight / 3) - top + 5, width: view.frame.width * 0.666, height: pickerViewHeight / 3).rectByInsetting(dx: 10, dy: 5)
+        sliderThree.frame = CGRect(x: view.frame.width * 0.333, y: view.frame.height - (pickerViewHeight / 3) - top + 5, width: view.frame.width * 0.666, height: pickerViewHeight / 3).insetBy(dx: 10, dy: 5)
     }
     
-    override func supportedInterfaceOrientations() -> Int
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
     {
-        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+        return UIInterfaceOrientationMask.Landscape
     }
     
     override func didReceiveMemoryWarning() {
